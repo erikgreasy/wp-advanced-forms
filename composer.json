@@ -1,16 +1,16 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "erikgreasy/wp-advanced-forms",
+    "description": "This is my package wp-advanced-forms",
     "keywords": [
-        ":vendor_name",
-        ":package_slug"
+        "erikgreasy",
+        "wp-advanced-forms"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/erikgreasy/wp-advanced-forms",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "erikgreasy",
+            "email": "erik.masny@gmail.com",
             "role": "Developer"
         }
     ],
@@ -24,12 +24,12 @@
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src"
+            "Erikgreasy\\WpAdvancedForms\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests"
+            "Erikgreasy\\WpAdvancedForms\\Tests\\": "tests"
         }
     },
     "scripts": {
