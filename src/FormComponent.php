@@ -2,9 +2,7 @@
 
 namespace Erikgreasy\WpAdvancedForms;
 
-use Illuminate\View\Component;
-
-abstract class FormComponent extends Component
+abstract class FormComponent
 {
     public string $action;
     public bool $onlyAdmin = false;
