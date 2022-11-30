@@ -5,6 +5,7 @@ namespace Erikgreasy\WpAdvancedForms;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Translation\FileLoader;
 use Illuminate\Translation\Translator;
+use Erikgreasy\WpAdvancedForms\FormComponent;
 use Illuminate\Validation\Factory as ValidationFactory;
 
 class WpAdvancedForms
@@ -12,6 +13,9 @@ class WpAdvancedForms
     private string $langDir;
     private ?ValidationFactory $validationFactory = null;
     private static ?self $instance = null;
+
+    /** @var FormComponent[] */
+    private array $forms = [];
 
     private function __construct()
     {
@@ -39,8 +43,12 @@ class WpAdvancedForms
 
     public static function load(array $forms): void
     {
+        $instance = self::getInstance();
+
         foreach ($forms as $form) {
-            (new $form())->register();
+            $formInstance = new $form;
+            $instance->forms[$form] = $formInstance;
+            $formInstance->register();
         }
     }
 
@@ -52,6 +60,17 @@ class WpAdvancedForms
     public function getValidationFactory()
     {
         return $this->validationFactory;
+    }
+
+    public static function getForm(string $className)
+    {
+        $instance = self::getInstance();
+
+        if(!array_key_exists($className, $instance->forms)) {
+            throw new \RuntimeException("Requested form $className instance not found. Did you load it?");
+        }
+        
+        return $instance->forms[$className];
     }
 
     private function getLangDir(): string
