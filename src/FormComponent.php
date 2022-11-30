@@ -2,6 +2,8 @@
 
 namespace Erikgreasy\WpAdvancedForms;
 
+use Illuminate\Validation\Factory as ValidationFactory;
+
 abstract class FormComponent
 {
     public bool $onlyAdmin = false;
@@ -9,6 +11,7 @@ abstract class FormComponent
     public string $hook;
     public string $hookNopriv;
     public bool $usesAjax = false;
+    protected ValidationFactory $validator;
 
     public function __construct()
     {
@@ -21,6 +24,8 @@ abstract class FormComponent
             $this->hook = 'admin_post_' . $this->actionName();
             $this->hookNopriv = 'admin_post_nopriv_' . $this->actionName();
         }
+    
+        $this->validator = WpAdvancedForms::getInstance()->getValidationFactory();
     }
 
     /**
