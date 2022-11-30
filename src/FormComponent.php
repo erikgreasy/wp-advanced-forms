@@ -63,15 +63,25 @@ abstract class FormComponent
      */
     public function classes(): string
     {
-        $classList = '';
+        $classList = 'wp-advanced-form';
 
         if($this->usesAjax) {
             $classList .= ' advanced-forms-ajax';
         }
 
+        return $classList;
+    }
+
+    public function openForm(): string
+    {
         return <<<HTML
-            class="$classList"
+            <form action="{$this->submitUrl}" method="POST" class="{$this->classes()}">
         HTML;
+    }
+
+    public function closeForm(): string
+    {
+        return '</form>';
     }
 
     /**
