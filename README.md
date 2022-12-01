@@ -69,7 +69,6 @@ $form = \Erikgreasy\WpAdvancedForms\WpAdvancedForms::getForm(
 ?>
 
 {!! $form->openForm() !!}
-    {!! $form->renderActionInput() !!}
     
     <input type="text" name="name">
 

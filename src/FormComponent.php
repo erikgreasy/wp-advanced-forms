@@ -76,7 +76,7 @@ abstract class FormComponent
     {
         return <<<HTML
             <form action="{$this->submitUrl}" method="POST" class="{$this->classes()}">
-        HTML;
+        HTML . $this->renderActionInput();
     }
 
     public function closeForm(): string
