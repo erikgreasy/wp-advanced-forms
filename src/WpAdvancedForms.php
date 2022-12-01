@@ -46,6 +46,10 @@ class WpAdvancedForms
         $instance = self::getInstance();
 
         foreach ($forms as $form) {
+            if(array_key_exists($form, $instance->forms)) {
+                throw new \RuntimeException("Form $form already registered. Dont you load this form multiple times?");
+            }
+
             $formInstance = new $form;
             $instance->forms[$form] = $formInstance;
             $formInstance->register();
