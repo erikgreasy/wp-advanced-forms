@@ -16,8 +16,8 @@
     ],
     "require": {
         "php": "^8.0",
-        "illuminate/translation": "^9.42",
-        "illuminate/validation": "^9.42"
+        "illuminate/translation": "^8.0 || ^9.0",
+        "illuminate/validation": "^8.0 || ^9.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.0",
