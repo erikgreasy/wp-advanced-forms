@@ -10,7 +10,6 @@ use Illuminate\Validation\Factory as ValidationFactory;
 
 class WpAdvancedForms
 {
-    private string $langDir;
     private ?ValidationFactory $validationFactory = null;
     private static ?self $instance = null;
 
@@ -56,11 +55,6 @@ class WpAdvancedForms
         }
     }
 
-    public static function setLangDir(string $langDir)
-    {
-        self::getInstance()->langDir = $langDir;
-    }
-
     public function getValidationFactory()
     {
         return $this->validationFactory;
@@ -77,12 +71,10 @@ class WpAdvancedForms
         return $instance->forms[$className];
     }
 
-    private function getLangDir(): string
+    public function getLangDir(): string
     {
-        if(isset($this->langDir)) {
-            return $this->langDir;
-        }
+        $langDir = apply_filters('wp_advanced_forms_lang_dir', dirname(__DIR__) . '/lang');
 
-        return dirname(__DIR__) . '/lang';;
+        return $langDir;
     }
 }
