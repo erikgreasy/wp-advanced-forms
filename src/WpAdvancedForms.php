@@ -60,7 +60,7 @@ class WpAdvancedForms
         return $this->validationFactory;
     }
 
-    public static function getForm(string $className)
+    public static function getForm(string $className): FormComponent
     {
         $instance = self::getInstance();
 
