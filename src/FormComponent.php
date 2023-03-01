@@ -11,7 +11,12 @@ abstract class FormComponent
     public string $hook;
     public string $hookNopriv;
     public bool $usesAjax = false;
+
+    protected ?string $enctype = null;
+
     protected ValidationFactory $validator;
+
+    protected ?string $id = null;
 
     public function __construct()
     {
@@ -63,7 +68,7 @@ abstract class FormComponent
      */
     public function classes(): string
     {
-        $classList = 'wp-advanced-form';
+        $classList = $this->actionName() . ' wp-advanced-form';
 
         if($this->usesAjax) {
             $classList .= ' advanced-forms-ajax';
@@ -74,14 +79,30 @@ abstract class FormComponent
 
     public function openForm(): string
     {
+        $enctype = $this->enctype ? 'enctype="'.$this->enctype.'"' : '';
+        $id = $this->id ? 'id="'. $this->id . '"' : '';
+
         return <<<HTML
-            <form action="{$this->submitUrl}" method="POST" class="{$this->classes()}">
+            <form 
+                action="{$this->submitUrl}"
+                method="POST" 
+                class="{$this->classes()}"
+                {$enctype}
+                {$id}
+            >
         HTML . $this->renderActionInput();
     }
 
     public function closeForm(): string
     {
         return '</form>';
+    }
+
+    public function setId(string $id): static
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     /**
